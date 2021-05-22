@@ -117,3 +117,10 @@ workflows:
             branches:
               only:
                 - master
+      - deploy_tmp:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
