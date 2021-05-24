@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-dark blue-gradient">
 
-  <a class="navbar-brand" href="/"><i class="fa fa-volleyball-ball mr-1"></i>サーカレ!</a>
+  <a class="navbar-brand" href="/"><i class="fa fa-volleyball-ball mr-1"></i>サーカレ！<br><font size="1">〜練習試合をもっと気軽に〜</font></a>
 
   <ul class="navbar-nav ml-auto">
 
