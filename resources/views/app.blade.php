@@ -16,6 +16,16 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
 
   <link href="{{ asset('/favicon.ico') }}" rel="shortcut icon">
+
+  <style>
+    /* body { 
+        background-image: url("/activity.jpg"); 
+        background-size: cover; 
+    } */
+    /* .navbar {
+      position:fixed;
+    } */
+  </style>
 </head>
 
 <body>
