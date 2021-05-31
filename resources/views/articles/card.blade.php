@@ -24,11 +24,11 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="{{ route("articles.edit", ['article' => $article]) }}">
-              <i class="fas fa-pen mr-1"></i>記事を更新する
+              <i class="fas fa-pen mr-1"></i>投稿を更新する
             </a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $article->id }}">
-              <i class="fas fa-trash-alt mr-1"></i>記事を削除する
+              <i class="fas fa-trash-alt mr-1"></i>投稿を削除する
             </a>
           </div>
         </div>
@@ -73,6 +73,12 @@
     </div>
   </div>
   <div class="card-body pt-0 pb-2 pl-3">
+    <!-- コメントアイコン -->
+    <div class="mr-3 d-flex align-items-center">
+      <a class="in-link p-1" href="{{ route('articles.show', ['article' => $article]) }}"><i class="far fa-comment fa-fw fa-lg"></i></a>
+      <p class="mb-0">{{ count($article->comments) }}</p>
+    </div>
+    <!-- いいねアイコン -->
     <div class="card-text">
       <article-like
         :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
