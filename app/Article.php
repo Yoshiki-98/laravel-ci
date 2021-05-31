@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\User;
+use App\Comment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,6 +13,7 @@ class Article extends Model
     protected $fillable = [
         'title',
         'body',
+        'user_id',
     ];
 
     public function user(): BelongsTo
@@ -38,5 +41,10 @@ class Article extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany('App\Tag')->withTimestamps();
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

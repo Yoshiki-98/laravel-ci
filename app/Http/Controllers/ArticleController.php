@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Comment;
 use App\Tag;
+use App\User;
 use App\Http\Requests\ArticleRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Exception;
 
 class ArticleController extends Controller
 {
@@ -28,13 +32,20 @@ class ArticleController extends Controller
             return ['text' => $tag->name];
         });
 
+        $user = Auth::user();
+
         return view('articles.create', [
             'allTagNames' => $allTagNames,
+            'user' => $user
         ]);
     }
 
     public function store(ArticleRequest $request, Article $article)
     {
+
+        // 二重送信対策
+        $request->session()->regenerateToken();
+
         $article->fill($request->all());
         $article->user_id = $request->user()->id;
         $article->save();
@@ -74,18 +85,28 @@ class ArticleController extends Controller
             $article->tags()->attach($tag);
         });
 
+        session()->flash('msg_success', '投稿を編集しました');
+
         return redirect()->route('articles.index');
     }
 
     public function destroy(Article $article)
     {
         $article->delete();
+
+        session()->flash('msg_success', '投稿を削除しました');
+
         return redirect()->route('articles.index');
     }
 
-    public function show(Article $article)
+    public function show(Article $article, Comment $comment)
     {
-        return view('articles.show', ['article' => $article]);
+        $comments = $articles->comments();
+
+        return view('articles.show', [
+            'article' => $article,
+            'comments' => $comments
+        ]);
     }
 
     public function like(Request $request, Article $article)
